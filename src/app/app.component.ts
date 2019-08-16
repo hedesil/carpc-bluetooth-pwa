@@ -1,25 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { BluetoothCore } from '@manekinekko/angular-web-bluetooth';
-
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [BluetoothCore]
 })
 
 
 export class AppComponent {
   title = 'carpcOBD';
-  public ble: BluetoothCore;
-  OnInit() {
+  errorMessage: string;
+  constructor() {
 
   }
 
-  getDevice() {
-    // you can get ask for the device observable in order to be notified when the device has (dis)connected
-    return this.ble.getDevice$();
+  public connect() {
+    this.errorMessage = 'Esperando error...';
+    navigator.bluetooth.requestDevice({acceptAllDevices: true})
+      .then(device => {
+        let deviceInfo: any;
+        deviceInfo.name = device.name;
+        deviceInfo.id = device.id;
+        console.log(device);
+        console.log('User paired with device name:', device.name,
+          'id:', device.id);
+      })
+      .catch(error => {
+        let errMes = error.message;
+        this.errorMessage = errMes;
+        console.log(errMes)
+      });
   }
-
 }

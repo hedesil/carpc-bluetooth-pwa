@@ -22,6 +22,7 @@
     "@angular/router": "~8.2.0",
     "@angular/service-worker": "~8.2.0",
     "@manekinekko/angular-web-bluetooth": "^7.0.0",
+    "@types/web-bluetooth": "^0.0.4",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
