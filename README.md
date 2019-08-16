@@ -1,6 +1,6 @@
 # CarpcOBD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+PWA that connects to a Bluetooth OBDII scanner and shows you information about your car in real time.
 
 ## Development server
 
