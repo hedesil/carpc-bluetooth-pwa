@@ -3,8 +3,10 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <button (click)="onButtonClick()">Click aqu&iacute; para emparejar</button>
-  <h3 style="color:red">{{Message}}</h3>
+  <button (click)="onConnectButtonClick()">Click aqu&iacute; para emparejar</button>
+  <button (click)="onDisconnectButtonClick()">Click aqu&iacute; para desemparejar</button>
+  <h3 style="color:red">{{deviceInfo}}</h3>
+  <h3 style="color:red">{{connectStatus}}</h3>
 </div>
 
 

@@ -9,46 +9,54 @@ import {Component} from '@angular/core';
 
 export class AppComponent {
   title = 'CarPC';
-  Message: string;
+  deviceInfo: string;
+  connectStatus: string;
+  bluetoothDevice: any;
+  serverConnected: any;
 
   constructor() {
 
   }
 
-  async onButtonClick() {
+  async onConnectButtonClick() {
     try {
       console.log('Requesting Bluetooth Device...');
-      const device = await navigator.bluetooth.requestDevice({
-        acceptAllDevices: true
-      });
+      this.bluetoothDevice = await navigator.bluetooth.requestDevice({acceptAllDevices: true});
 
       const deviceInfo: any = {
-        name: device ? device.name : device.id,
-        id: device.id
+        name: this.bluetoothDevice ? this.bluetoothDevice.name : this.bluetoothDevice.id,
+        id: this.bluetoothDevice.id
       };
 
-      if (deviceInfo.name !== null && device.name !== undefined) {
-        this.Message = 'Has encontrado ' + deviceInfo.name;
+      if (deviceInfo.name !== null && this.bluetoothDevice.name !== undefined) {
+        this.deviceInfo = 'Has encontrado ' + deviceInfo.name;
       } else {
-        this.Message = 'Has encontrado ' + deviceInfo.id;
-        console.log(device);
+        this.deviceInfo = 'Has encontrado ' + deviceInfo.id;
+        console.log(this.bluetoothDevice);
       }
 
       console.log('Connecting to GATT Server...');
-      const server = await device.gatt.connect();
+      this.serverConnected = await this.connect(this.bluetoothDevice.gatt);
+      this.connectStatus = JSON.stringify(this.serverConnected, null, 4);
 
-      console.log('Getting Battery Service...');
-      const service = await server.getPrimaryService('battery_service');
-
-      console.log('Getting Battery Level Characteristic...');
-      const characteristic = await service.getCharacteristic('battery_level');
-
-      console.log('Reading Battery Level...');
-      const value = await characteristic.readValue();
-
-      console.log('> Battery Level is ' + value.getUint8(0) + '%');
     } catch (error) {
       console.log('Argh! ' + error);
+    }
+  }
+
+  async connect(deviceGatt) {
+    await deviceGatt.connect();
+  }
+
+  onDisconnectButtonClick() {
+    if (!this.bluetoothDevice) {
+      return;
+    }
+    console.log('Disconnecting from Bluetooth Device...');
+    if (this.bluetoothDevice.gatt.connected) {
+      this.bluetoothDevice.gatt.disconnect();
+    } else {
+      console.log('> Bluetooth Device is already disconnected');
     }
   }
 
