@@ -57,6 +57,7 @@ export class AppComponent {
       this.bluetoothDevice.gatt.disconnect();
     } else {
       console.log('> Bluetooth Device is already disconnected');
+      this.deviceInfo = 'Te has desconectado del dispositivo.'
     }
   }
 
