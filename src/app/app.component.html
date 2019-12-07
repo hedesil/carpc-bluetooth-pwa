@@ -1,10 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <button (click)="onConnectButtonClick()">Click aqu&iacute; para emparejar</button>
-  <button (click)="onDisconnectButtonClick()">Click aqu&iacute; para desemparejar</button>
+  <mat-toolbar>CarPC Astra H </mat-toolbar>
+  <div class="btn-group-lg buttons-container">
+    <mat-button-toggle class="btn-primary" (click)="onConnectButtonClick()">Click aqu&iacute; para emparejar</mat-button-toggle>
+    <mat-button-toggle class="btn-primary" (click)="onDisconnectButtonClick()">Click aqu&iacute; para desemparejar</mat-button-toggle>
+  </div>
+
+  <br>
   <h3 style="color:red">{{deviceInfo}}</h3>
   <h3 style="color:red">{{connectStatus}}</h3>
 </div>

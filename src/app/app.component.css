@@ -1,0 +1,12 @@
+mat-button-toggle {
+  background-color: #6a83ff;
+}
+
+.buttons-container {
+  margin-top: 1em;
+}
+
+.buttons-container mat-button-toggle {
+  margin: 1em;
+  color: #FFFFFF;
+}
