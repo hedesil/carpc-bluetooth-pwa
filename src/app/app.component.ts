@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'CarPC';
   deviceInfo: string;
   connectStatus: string;
-  bluetoothDevice: any;
+  bluetoothDevice: BluetoothDevice;
   serverConnected: any;
 
   constructor() {
@@ -21,30 +21,34 @@ export class AppComponent {
   async onConnectButtonClick() {
     try {
       console.log('Requesting Bluetooth Device...');
-      this.bluetoothDevice = await navigator.bluetooth.requestDevice({acceptAllDevices: true});
-
+      this.bluetoothDevice = await navigator.bluetooth.requestDevice({acceptAllDevices: true,
+        optionalServices: ['00001101-0000-1000-8000-00805f9b34fb']});
       const deviceInfo: any = {
         name: this.bluetoothDevice ? this.bluetoothDevice.name : this.bluetoothDevice.id,
         id: this.bluetoothDevice.id
       };
-
       if (deviceInfo.name !== null && this.bluetoothDevice.name !== undefined) {
         this.deviceInfo = 'Has encontrado ' + deviceInfo.name;
       } else {
         this.deviceInfo = 'Has encontrado ' + deviceInfo.id;
         console.log(this.bluetoothDevice);
       }
-
       console.log('Connecting to GATT Server...');
-      this.serverConnected = await this.connect(this.bluetoothDevice.gatt);
-      this.connectStatus = JSON.stringify(this.serverConnected, null, 4);
+      await this.connect(this.bluetoothDevice.gatt);
+      await this.bluetoothDevice.gatt.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb');
+      console.log(await this.bluetoothDevice.gatt.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb'))
     } catch (error) {
       console.log('Argh! ' + error);
     }
   }
 
   async connect(deviceGatt) {
-    await deviceGatt.connect();
+    try {
+      await deviceGatt.connect();
+    } catch {
+      console.log('Ha habido un error');
+    }
+
   }
 
   onDisconnectButtonClick() {
@@ -56,10 +60,10 @@ export class AppComponent {
       this.bluetoothDevice.gatt.disconnect();
     } else {
       console.log('> Bluetooth Device is already disconnected');
-      this.deviceInfo = 'Te has desconectado del dispositivo.'
+      this.deviceInfo = 'Te has desconectado del dispositivo.';
     }
   }
 
-  show
+  show;
 
 }
