@@ -38,7 +38,6 @@ export class AppComponent {
       console.log('Connecting to GATT Server...');
       this.serverConnected = await this.connect(this.bluetoothDevice.gatt);
       this.connectStatus = JSON.stringify(this.serverConnected, null, 4);
-
     } catch (error) {
       console.log('Argh! ' + error);
     }
