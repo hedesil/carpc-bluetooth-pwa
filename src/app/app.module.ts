@@ -6,7 +6,14 @@ import {environment} from '../environments/environment';
 import {WebBluetoothModule} from '@manekinekko/angular-web-bluetooth';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {MatButtonToggleModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatDividerModule,
+  MatGridListModule,
+  MatToolbarModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -21,7 +28,11 @@ import {MatButtonToggleModule, MatToolbarModule} from '@angular/material';
     }),
     BrowserAnimationsModule,
     MatButtonToggleModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

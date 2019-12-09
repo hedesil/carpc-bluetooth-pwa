@@ -1,14 +1,36 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <mat-toolbar>CarPC Astra H </mat-toolbar>
+  <mat-toolbar>CarPC Astra H</mat-toolbar>
   <div class="btn-group-lg buttons-container">
-    <mat-button-toggle class="btn-primary" (click)="onConnectButtonClick()">Click aqu&iacute; para emparejar</mat-button-toggle>
-    <mat-button-toggle class="btn-primary" (click)="onDisconnectButtonClick()">Click aqu&iacute; para desemparejar</mat-button-toggle>
+    <mat-button-toggle class="btn-primary" (click)="onConnectButtonClick()">Click aqu&iacute; para emparejar
+    </mat-button-toggle>
+    <mat-button-toggle class="btn-primary" (click)="onDisconnectButtonClick()">Click aqu&iacute; para desemparejar
+    </mat-button-toggle>
   </div>
 
   <br>
-  <h3 style="color:red">{{deviceInfo}}</h3>
-  <h3 style="color:red">{{connectStatus}}</h3>
+
+  <div class="flex-container">
+    <ng-container *ngIf="deviceInfo">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Connectado a {{deviceInfo}}</mat-card-title>
+          <mat-card-subtitle>Dispositivo OBDII</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <img mat-card-image src="../assets/icons/OBD-II_type_A_female_connector_shape.svg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="getGATTServices()">Obtener servicios principales</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
+
 </div>
 
 
