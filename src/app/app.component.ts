@@ -38,8 +38,6 @@ export class AppComponent {
       this.server = await this.bluetoothDevice.gatt.connect();
       console.log('Connected to GATT Server...');
 
-      // await this.bluetoothDevice.gatt.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb');
-      // console.log(await this.bluetoothDevice.gatt.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb'))
     } catch (error) {
       console.log('Argh! ' + error);
     }

@@ -2,8 +2,7 @@
 
 #Firebase config
 .firebaserc
-.firebase
-firebase.json
+/.firebase
 
 # compiled output
 /dist
